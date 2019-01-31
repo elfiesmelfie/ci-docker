@@ -1,2 +1,59 @@
-FROM alpine
-CMD ["echo", "placeholder image"]
+FROM fedora:28
+
+ADD redhat.sh /redhat.sh
+
+ENV EXTRA_PACKAGES="\
+  OpenIPMI-devel \
+  dpdk-devel \
+  ganglia-devel \
+  gpsd-devel \
+  gtk2-devel \
+  hiredis-devel \
+  intel-cmt-cat-devel \
+  iproute-devel \
+  iptables-devel \
+  java-9-openjdk-devel \
+  java-devel \
+  jpackage-utils \
+  libatasmart-devel \
+  libcap-devel \
+  libcurl-devel \
+  libdbi-devel \
+  libesmtp-devel \
+  libmemcached-devel \
+  libmicrohttpd-devel \
+  libmnl-devel \
+  libmodbus-devel \
+  libnotify-devel \
+  liboping-devel \
+  libpcap-devel \
+  librabbitmq-devel \
+  librdkafka-devel \
+  libsigrok-devel \
+  libudev-devel \
+  libvirt-devel \
+  libxml2-devel \
+  lm_sensors-devel \
+  lua-devel \
+  lvm2-devel \
+  mosquitto-devel \
+  mysql-devel \
+  net-snmp-devel \
+  nut-devel \
+  openldap-devel \
+  owfs-devel \
+  perl-ExtUtils-Embed \
+  postgresql-devel \
+  protobuf-c-devel \
+  python-devel \
+  python3-devel \
+  riemann-c-client-devel \
+  rrdtool-devel \
+  varnish-libs-devel \
+  xen-devel \
+  xfsprogs-devel \
+  xmms-devel \
+  yajl-devel \
+"
+
+RUN /redhat.sh
