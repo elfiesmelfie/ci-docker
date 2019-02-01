@@ -50,4 +50,6 @@ ENV EXTRA_PACKAGES="\
   yajl-devel \
 "
 
+RUN echo "exclude = *.x86_64" >> /etc/yum.conf
+
 RUN /redhat.sh
