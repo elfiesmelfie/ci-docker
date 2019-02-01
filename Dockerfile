@@ -1,4 +1,4 @@
-FROM centos:6
+FROM i386/centos:6
 
 ADD redhat.sh /redhat.sh
 
