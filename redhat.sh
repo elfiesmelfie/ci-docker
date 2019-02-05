@@ -24,9 +24,12 @@ COMMON_PACKAGES="\
   strace \
   tar \
   valgrind \
+  which \
 "
 
-yum -y update
+grep -q ^Fedora /etc/redhat-release && alias yum=dnf || true
+
+yum -y --skip-broken update
 
 yum -y install $COMMON_PACKAGES $EXTRA_PACKAGES
 
