@@ -1,0 +1,38 @@
+name: Build
+
+on:
+  push:
+    branches: main
+  # This will eventually be run on a schedule, daily initially, but some might be better weekly.
+  #  schedule:
+  #    - cron: '0 0 * * *'
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        branch:
+          - sid_amd64
+    env:
+      # These three values need to be updated for collectd/collectd-ci
+      # SLUG: "collectd/ci:${{ matrix.branch }}"
+      SLUG: "ghcr.io/${{ github.actor }}/collectd-ci:${{ matrix.branch }}"
+      # DOCKER_LOGIN: "{{ secrets.dockerhub_username }}
+      DOCKER_LOGIN: ${{ github.actor }}
+      # DOCKER_PASSWORD: ${{ secrets.dockerhub_password }}
+      DOCKER_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        ref: ${{ matrix.branch }}
+    - name: Build container
+      run:
+        docker build --pull -t "${SLUG}" .
+    - run: docker inspect "${SLUG}"
+    - run: docker history "${SLUG}"
+    - run: echo "${DOCKER_PASSWORD}" | docker login ghcr.io --username "${DOCKER_LOGIN}" --password-stdin
+    - run: docker push "${SLUG}"
