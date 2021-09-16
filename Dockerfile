@@ -52,7 +52,6 @@ ENV EXTRA_PACKAGES="\
   varnish-libs-devel \
   xen-devel \
   xfsprogs-devel \
-  xmms-devel \
   yajl-devel \
 "
 
