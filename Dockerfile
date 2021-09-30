@@ -38,7 +38,7 @@ ENV EXTRA_PACKAGES="\
   lua-devel \
   mongo-c-driver-devel \
   mosquitto-devel \
-  mysql-devel \
+  mariadb-devel \
   net-snmp-devel \
   nut-devel \
   openldap-devel \
